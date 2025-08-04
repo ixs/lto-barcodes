@@ -20,7 +20,18 @@ if ($id != 'U') {
     $id = 'CU';
 }
 
+$colorizeChars = (isset($_GET['colorizeChars']) && $_GET['colorizeChars'] == 1) ? true : false;
+
 $tapeType = $_GET['tapeType'] ?? 'normal';
+
+$fontType = $_GET['fontType'] ?? 'normal';
+if ($fontType == 'normal') {
+    $font = 'Arial';
+    $fontweight = 'B';
+} elseif ($fontType == 'ocr') {
+    $font = 'OCRA';
+    $fontweight = '';
+}
 
 // Prefix
 //$pre = 'BWN';
@@ -55,7 +66,10 @@ function lto_label($x, $y, $code, $id, $palette) {
 	global $colors;
 	global $pdf;
 	global $text_h;
+        global $font;
+        global $fontweight;
         global $textColor;
+        global $colorizeChars;
 
 	// Label outer border/marker
 	$pdf->SetLineWidth(0.05);
@@ -66,16 +80,20 @@ function lto_label($x, $y, $code, $id, $palette) {
 	$pdf->SetX($x+4);
 
         // Label text size
-	$pdf->SetFont('Arial', 'B', 14);
+	$pdf->SetFont($font, $fontweight, 14);
         $pdf->SetTextColor($textColor[0], $textColor[1], $textColor[2]);
         // Label Code
 	for ($i = 0; $i < strlen($code); $i++) {
 		$char = substr($code, $i, 1);
-		$pdf->SetFillColor($colors[$palette][$char][0], $colors[$palette][$char][1], $colors[$palette][$char][2]);
-		$pdf->Cell(10, $text_h, $char, 1, 0, 'C', 1);
+                if ($colorizeChars === true && !ctype_digit($char) || ctype_digit($char)) {
+                    $pdf->SetFillColor($colors[$palette][$char][0], $colors[$palette][$char][1], $colors[$palette][$char][2]);
+                    $pdf->Cell(10, $text_h, $char, 1, 0, 'C', 1);
+                } else {
+                    $pdf->Cell(10, $text_h, $char, 1, 0, 'C', 0);
+                }
 	}
         // Tape Type marker
-	$pdf->SetFont('Arial', 'B', 8);
+	$pdf->SetFont($font, $fontweight, 8);
 	$pdf->SetFillColor($colors[$palette][" "][0], $colors[$palette][" "][1], $colors[$palette][" "][2]);
 	$pdf->Cell(10, $text_h, $id, 1, 0, 'C', 1);
 
@@ -85,6 +103,9 @@ function lto_label($x, $y, $code, $id, $palette) {
 }
 
 $pdf=new PDF_Code39('P', 'mm', 'A4');
+if ($fontType != 'normal') {
+    $pdf->AddFont($font, $fontweight, $font.'.php');
+}
 $pdf->AddPage();
 $pdf->SetMargins(10, 10, 10, 10);
 
