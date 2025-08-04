@@ -1,0 +1,145 @@
+    :root {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      --primary: #2c3e50;
+      --accent: #2980b9;
+      --bg: #f4f6f8;
+    }
+
+    body {
+      margin: 0;
+      padding: 1em;
+      background-color: var(--bg);
+      color: var(--primary);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    form {
+      max-width: 700px;
+      margin: 0 auto 2em auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1.5em;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1em;
+    }
+
+    label, legend {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.2em;
+    }
+
+    legend ~ label {
+        font-weight: normal;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 0.4em;
+      font-size: 1em;
+      box-sizing: border-box;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4em;
+    }
+
+    .buttons {
+      margin-top: 1em;
+      text-align: right;
+    }
+
+    input[type="submit"], input[type="reset"] {
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"] {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    input[type="reset"] {
+      background-color: #ddd;
+    }
+
+    .label-container {
+      max-width: 300px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #333;
+      border-radius: 4px;
+      overflow: hidden;
+      text-align: center;
+      font-family: monospace;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: center;
+//      border-bottom: 1px solid #333;
+    }
+
+    .letter {
+      flex: 0 0 32px;
+      height: 32px;
+      width: 32px;
+      line-height: 32px;
+      border-right: 1px solid #333;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .mediatype {
+      flex: 0 0 32px;
+      height: 32px;
+      width: 32px;
+      line-height: 32px;
+      font-size: 10px;
+      font-weight: bold;
+      border-top: 1px solid #333;
+    }
+
+    .barcode {
+//      margin: 0.5em 0;
+      margin: 0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2em;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .buttons {
+        text-align: center;
+      }
+    }
+
+//    div { border: 1px solid black; }
