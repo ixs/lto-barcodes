@@ -226,7 +226,7 @@ echo '</select></td>
  </tr>
 </table>
 
-<p>A quick <a href="https:/github.com/ixs/lto-barcodes/">ixs</a> hack.</p>
+<p>A quick <a href="https://github.com/ixs/lto-barcodes/">ixs</a> hack.</p>
 </body>
 </html>';
 
