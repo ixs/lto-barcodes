@@ -100,6 +100,7 @@ echo '</select></td>
   <td colspan="2"><input type="reset"></td>
  </tr>
 </table>
+<input type="hidden" name="colorizeChars" value="1">
 </form>
 
 <table class="label">
