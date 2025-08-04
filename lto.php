@@ -1,7 +1,8 @@
 <?php
 define('FPDF_FONTPATH','font/');
 require('code39.php');
-require('colors.php');
+
+$colors = json_decode(file_get_contents("colors.json"), true);
 
 // Colorscheme
 $palette = $_GET['colorscheme'] ?? 'HOT';
@@ -11,17 +12,31 @@ $y = (int)10;
 $text_h = (float)5.9;
 
 // Tapegeneration
-//$id = 'L1';
-if ($_GET['tapeGen'] != 'U') {
+$id = $_GET['tapeGen'] ?? 'U';
+if ($id != 'U') {
 	$bla = (int)$_GET['tapeGen'];
 	$id = 'L'.$bla;
 } else {
-	$id = 'L1';
+    $id = 'CU';
 }
+
+$tapeType = $_GET['tapeType'] ?? 'normal';
 
 // Prefix
 //$pre = 'BWN';
 $pre = $_GET['prefix'] ?? '';
+
+if ($tapeType === "cln") {
+    $pre = "CLN";
+    $palette = "BW";
+    $id = "CU";
+} elseif ($tapeType === "dg") {
+    $pre = "DG ";
+    $palette = "INV";
+}
+
+// Black text, except if we're inverted.
+$textColor = ($palette != "INV") ? [0, 0, 0] : [255, 255, 255];
 
 // Start number
 //$start = 24;
@@ -40,22 +55,32 @@ function lto_label($x, $y, $code, $id, $palette) {
 	global $colors;
 	global $pdf;
 	global $text_h;
+        global $textColor;
 
+	// Label outer border/marker
 	$pdf->SetLineWidth(0.05);
 	$pdf->Rect($x, $y, 79, 17, 'D');
 
+        // Barcode/label inner position
 	$pdf->SetY($y);
 	$pdf->SetX($x+4);
+
+        // Label text size
 	$pdf->SetFont('Arial', 'B', 14);
+        $pdf->SetTextColor($textColor[0], $textColor[1], $textColor[2]);
+        // Label Code
 	for ($i = 0; $i < strlen($code); $i++) {
 		$char = substr($code, $i, 1);
 		$pdf->SetFillColor($colors[$palette][$char][0], $colors[$palette][$char][1], $colors[$palette][$char][2]);
 		$pdf->Cell(10, $text_h, $char, 1, 0, 'C', 1);
 	}
+        // Tape Type marker
 	$pdf->SetFont('Arial', 'B', 8);
-	$pdf->Cell(10, $text_h, $id, 1, 0, 'C', 0);
+	$pdf->SetFillColor($colors[$palette][" "][0], $colors[$palette][" "][1], $colors[$palette][" "][2]);
+	$pdf->Cell(10, $text_h, $id, 1, 0, 'C', 1);
 
-	$pdf->SetFillColor(0, 0, 0);
+        // Code39 Barcode
+        $pdf->SetFillColor(0, 0, 0);
 	$pdf->Code39((float)$x+4.8, (float)$y+$text_h, $code . $id, 1.285, 11.10); //, true, false, true, false);
 }
 
@@ -94,7 +119,7 @@ for ($i; $i < $num; $i++) {
 
 }
 
-$scheme =  (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$scheme =  (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'];
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestUri = "/";
@@ -102,9 +127,10 @@ $url = $scheme . '://' . $host . $requestUri;
 
 $pdf->SetAutoPageBreak(False);
 $pdf->SetFont('Arial', '', 8);
+$pdf->SetTextColor(0, 0, 0);
 $pdf->SetX(0);
 $pdf->SetY(-15);
-$pdf->Cell(190, 10, 'LTO Barcode Generator at ' . $url, 0, 0, 'R');
+$pdf->Cell(190, 10, 'LTO Barcode Generator at ' . $url, 0, 0, 'R', false, '$url');
 
 $pdf->Output();
 ?>
