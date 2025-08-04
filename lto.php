@@ -130,7 +130,7 @@ $pdf->SetFont('Arial', '', 8);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->SetX(0);
 $pdf->SetY(-15);
-$pdf->Cell(190, 10, 'LTO Barcode Generator at ' . $url, 0, 0, 'R', false, '$url');
+$pdf->Cell(190, 10, 'LTO Barcode Generator at ' . $url, 0, 0, 'R', false, $url);
 
 $pdf->Output();
 ?>
