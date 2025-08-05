@@ -18,17 +18,18 @@ foreach ($colors as $paletteName => $palette) {
     echo 'var '.$paletteName.' = new Array();'."\n";
     echo $paletteName.' = new Object();'."\n";
 
-    $j = 0;
     foreach ($chr_ranges as list($start, $end)) {
+        $j = 0;
         for ($i = $start; $i <= $end; $i++) {
             $char = chr($i);
             // Grab RGB color, special case for Space
             $rgb = ($char == " ") ? $palette[" "] : $palette[$j % 10];
             $hexColor = sprintf("#%02x%02x%02x", $rgb[0], $rgb[1], $rgb[2]);
-            echo $paletteName . "[\"$char\"] = \"$hexColor\";\n";
+            echo $paletteName . "[\"$char\"] = '$hexColor';\n";
             $j++;
         }
     }
+    echo "\n";
 }
 
 ?>
