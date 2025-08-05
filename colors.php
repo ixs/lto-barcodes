@@ -36,7 +36,7 @@ foreach ($colors as $paletteName => $palette) {
     echo "<h2>Palette: " . htmlspecialchars($paletteName) . "</h2>";
     echo "<table><tr>";
 
-    $textColor = (strtoupper($paletteName) === 'INV') ? '#fff' : '#000';
+    $textColor = (strtoupper($paletteName) == 'COOL' || strtoupper($paletteName) == 'INV') ? '#fff' : '#000';
 
     foreach ($palette as $char => $rgb) {
         $bgColor = sprintf("rgb(%d,%d,%d)", $rgb[0], $rgb[1], $rgb[2]);
