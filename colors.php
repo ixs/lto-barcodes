@@ -39,7 +39,7 @@ foreach ($colors as $paletteName => $palette) {
     echo "<h2>Palette: " . htmlspecialchars($paletteName) . "</h2>\n";
     echo "<table><tr>\n";
 
-    $textColor = (strtoupper($paletteName) == 'COOL' || strtoupper($paletteName) == 'INV') ? '#fff' : '#000';
+    $textColor = (strtoupper($paletteName) == 'COOL' || strtoupper($paletteName) == 'BLACK') ? '#fff' : '#000';
 
     foreach ($chr_ranges as list($start, $end)) {
         $j = 0;
@@ -56,4 +56,3 @@ foreach ($colors as $paletteName => $palette) {
 }
 
 echo '</body></html>'."\n";
-

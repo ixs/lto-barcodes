@@ -91,12 +91,12 @@ function updateColors() {
 		}
 	}
 
-	if (getColor() == "INV") {
+	if (getColor() == "BLACK") {
 		for (var i = 1; i <= 6; i++) {
 			eval("l" + i + ".style.color = \"white\"");
 		}
 		mediatype.style.color = "white";
-		mediatype.style.backgroundColor = INV [" "];
+		mediatype.style.backgroundColor = BLACK [" "];
 	} else {
 		for (var i = 1; i <= 6; i++) {
 			eval("l" + i + ".style.color = \"black\"");
@@ -141,13 +141,13 @@ function updateTapeType() {
 		document.getElementsByName("prefix")[0].value = "CLN";
 		document.getElementsByName("prefix")[0].disabled = true;
 		document.querySelector('input[name="colorizeChars"]').checked = false;
-		document.querySelector('select[name="colorscheme"]').value = 'BW';
+		document.querySelector('select[name="colorscheme"]').value = 'WHITE';
 		document.querySelector('select[name="tapeGen"]').value = 'U';
 	} else if (type == "dg") {
 		document.getElementsByName("prefix")[0].value = "DG ";
 		document.getElementsByName("prefix")[0].disabled = true;
 		document.querySelector('input[name="colorizeChars"]').checked = false;
-		document.querySelector('select[name="colorscheme"]').value = 'INV';
+		document.querySelector('select[name="colorscheme"]').value = 'BLACK';
 		document.querySelector('select[name="tapeGen"]').value = '1';
 	}
 	updateTextlabel();
