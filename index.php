@@ -84,6 +84,19 @@
     </div>
   </div>
 
+  <section class="description">
+    <h2>Funktionsbeschreibung</h2>
+    <p>
+      Diese Webanwendung generiert <strong>Barcode-Etiketten für LTO-Datenträger</strong> gemäß den Spezifikationen gängiger LTO-Generationen (LTO-1 bis LTO-9 sowie Universal).
+      Über das Formular können <strong>Präfix</strong> und <strong>Suffix</strong>, der <strong>LTO-Typ</strong>, der <strong>Kassetten-Typ</strong> (Daten-, Reinigungs- oder Diagnosekassette)
+      sowie das <strong>Farbschema</strong> konfiguriert werden. Zusätzlich können die Verwendung einer <strong>OCR-A-Schriftart</strong> und
+      <strong>farbige Zeichen</strong> aktiviert werden.
+    </p>
+    <p>
+      Nach dem Absenden wird ein <strong>PDF-Dokument mit 24 identischen Etiketten</strong> erzeugt, das sich zum Ausdrucken auf geeigneten Etikettenbögen eignet.
+    </p>
+  </section>
+
   <footer>
     <a href="https://github.com/ixs/lto-barcodes/">A quick hack, &copy; 2007-2025 Andreas Thienemann</a>.
   </footer>

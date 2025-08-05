@@ -154,6 +154,18 @@ input[type="reset"] {
   margin: 0 auto;
 }
 
+.description {
+  margin: 3.5em auto;
+  max-width: 65pc;
+  padding: 1em;
+  background-color: #f9f9f9;
+  border-left: 4px solid #ccc;
+}
+
+.description h2 {
+  margin-top: 0;
+}
+
 footer {
   text-align: center;
   margin-top: 2em;
