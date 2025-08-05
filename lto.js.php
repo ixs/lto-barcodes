@@ -49,9 +49,21 @@ function updateText(prefix, suffix) {
 
 }
 
+function updateBarcode() {
+	label = (prefix.value + suffix.value).substr(0, 6) + "L" + document.getElementsByName("tapeGen")[0].value;
+	JsBarcode("#barcode", label, {
+		format: "CODE39",
+		displayValue: false,
+		height: 45,
+		width: 1.34,
+		margin: 0
+	});
+}
+
 function updateTextlabel() {
 	updateText(prefix, suffix);
 	updateColors();
+	updateBarcode();
 }
 
 function updateColors() {
@@ -94,6 +106,7 @@ function updateTapeGen() {
 		}
 		document.getElementsByName("tapeGen")[0].value;
 	}
+	updateBarcode();
 }
 
 function updateTapeType() {
@@ -121,6 +134,7 @@ function updateTapeType() {
 	}
 	updateTextlabel();
 	updateColors();
+	updateBarcode();
 }
 
 function Init() {

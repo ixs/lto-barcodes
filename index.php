@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="lto.css">
   <script type="text/javascript" src="lto.js.php" defer></script>
+  <script type="text/javascript" src="JsBarcode.code39.min.js"></script>
 </head>
 
 <body onload="Init()">
@@ -80,7 +81,7 @@
       <div id="mediatype" class="letter mediatype">L1</div>
     </div>
     <div class="barcode">
-      <img src="barcode.png" alt="Barcode" style="max-width: 100%; height: auto;" />
+      <img src="barcode.png" alt="Barcode" id="barcode" style="max-width: 100%; height: auto;" />
     </div>
   </div>
 
@@ -103,4 +104,3 @@
 
 </body>
 </html>
-
