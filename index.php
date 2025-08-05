@@ -65,7 +65,7 @@
 
     <div class="buttons">
       <input type="submit" value="Generieren">
-      <input type="reset" value="Zurücksetzen">
+      <input type="reset" onClick="setTimeout(updateColors, 0)" value="Zurücksetzen">
     </div>
   </form>
 

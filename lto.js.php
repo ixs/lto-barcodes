@@ -63,6 +63,20 @@ function updateColors() {
 			eval("l" + i + ".style.backgroundColor = " + getColor() + " [l" + i + ".firstChild.nodeValue]");
 		}
 	}
+
+	if (getColor() == "INV") {
+		for (var i = 1; i <= 6; i++) {
+			eval("l" + i + ".style.color = \"white\"");
+		}
+		mediatype.style.color = "white";
+		mediatype.style.backgroundColor = INV [" "];
+	} else {
+		for (var i = 1; i <= 6; i++) {
+			eval("l" + i + ".style.color = \"black\"");
+		}
+		mediatype.style.color = "black";
+		mediatype.style.backgroundColor = eval(getColor() + " [' ']");
+	}
 }
 
 function updateTapeGen() {
@@ -92,15 +106,18 @@ function updateTapeType() {
 	if (type == "normal") {
 		document.getElementsByName("prefix")[0].value = "ABC";
 		document.getElementsByName("prefix")[0].disabled = false;
+		document.querySelector('select[name="colorscheme"]').value = 'HOT';
 	} else if (type == "cln") {
 		document.getElementsByName("prefix")[0].value = "CLN";
 		document.getElementsByName("prefix")[0].disabled = true;
+		document.querySelector('select[name="colorscheme"]').value = 'BW';
 	} else if (type == "dg") {
 		document.getElementsByName("prefix")[0].value = "DG ";
 		document.getElementsByName("prefix")[0].disabled = true;
+		document.querySelector('select[name="colorscheme"]').value = 'INV';
 	}
 	updateTextlabel();
-
+	updateColors();
 }
 
 function Init() {
