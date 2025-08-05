@@ -10,19 +10,25 @@ var mediatype, type;
 // define colors
 <?php
 
+// Space, 0-9, A-Z as Dec ASCII Code ranges
+$chr_ranges = [[32, 32], [48, 57], [65, 90]];
 $colors = json_decode(file_get_contents("colors.json"), true);
 
-foreach (array_keys($colors) as $color) {
-	echo 'var '.$color.' = new Array();'."\n";
-	echo $color.' = new Object();'."\n";
+foreach ($colors as $paletteName => $palette) {
+    echo 'var '.$paletteName.' = new Array();'."\n";
+    echo $paletteName.' = new Object();'."\n";
 
-	foreach ($colors[$color] as $key => $val) {
-		$r = str_pad(dechex($val[0]), 2, '0', STR_PAD_LEFT);
-		$g = str_pad(dechex($val[1]), 2, '0', STR_PAD_LEFT);
-		$b = str_pad(dechex($val[2]), 2, '0', STR_PAD_LEFT);
-		echo $color.'["'.$key.'"] = \'#'.$r.$g.$b.'\';'."\n";
-	}
-	echo "\n";
+    $j = 0;
+    foreach ($chr_ranges as list($start, $end)) {
+        for ($i = $start; $i <= $end; $i++) {
+            $char = chr($i);
+            // Grab RGB color, special case for Space
+            $rgb = ($char == " ") ? $palette[" "] : $palette[$j % 10];
+            $hexColor = sprintf("#%02x%02x%02x", $rgb[0], $rgb[1], $rgb[2]);
+            echo $paletteName . "[\"$char\"] = \"$hexColor\";\n";
+            $j++;
+        }
+    }
 }
 
 ?>
