@@ -2,12 +2,13 @@
 
 header("Content-Type: text/javascript");
 
-echo '
+?>
+
 var l1, l2, l3, l4, l5, l6;
-var suffix, prefix, mediatype, type;
+var mediatype, type;
 
 // define colors
-';
+<?php
 
 $colors = json_decode(file_get_contents("colors.json"), true);
 
@@ -30,15 +31,30 @@ function getColor() {
 	return document.getElementsByName("colorscheme")[0].value;
 }
 
-function updateText(prefix, suffix) {
-	// Concat and cut to 6 Upperchars
-	string = prefix.value + suffix.value;
-	string = string.substr(0, 6);
-	string = string.toUpperCase();
-	// Pad the string to 6 chars
-	for (var i = string.length; i <= 6; i++) {
-		string = string + " ";
+function getLabelText() {
+        let mediatype, count, suffix, prefix, typeType, tapegen;
+
+	prefix = document.getElementsByName("prefix")[0].value;
+	count = document.getElementsByName("count")[0].value;
+	suffix = document.getElementsByName("suffix")[0].value;
+	tapeType = document.querySelector('input[name="tapeType"]:checked').value;
+	tapegen = document.getElementsByName("tapeGen")[0].value;
+
+	if (tapeType == "cln") {
+		mediatype = "C" + tapegen;
+	} else {
+		mediatype = "L" + tapegen;
 	}
+
+        count = count.padStart(6 - prefix.length - suffix.length, "0");
+	let label = (prefix + count + suffix).substr(0, 6) + mediatype;
+	console.log("label: " + label);
+	return label;
+
+}
+
+function updateText() {
+	string = getLabelText();
 
 	l1.firstChild.nodeValue = string.charAt(0);
 	l2.firstChild.nodeValue = string.charAt(1);
@@ -46,12 +62,11 @@ function updateText(prefix, suffix) {
 	l4.firstChild.nodeValue = string.charAt(3);
 	l5.firstChild.nodeValue = string.charAt(4);
 	l6.firstChild.nodeValue = string.charAt(5);
-
+	mediatype.firstChild.nodeValue = string.substr(6, 8);
 }
 
 function updateBarcode() {
-	label = (prefix.value + suffix.value).substr(0, 6) + "L" + document.getElementsByName("tapeGen")[0].value;
-	JsBarcode("#barcode", label, {
+	JsBarcode("#barcode", getLabelText(), {
 		format: "CODE39",
 		displayValue: false,
 		height: 45,
@@ -61,7 +76,7 @@ function updateBarcode() {
 }
 
 function updateTextlabel() {
-	updateText(prefix, suffix);
+	updateText();
 	updateColors();
 	updateBarcode();
 }
@@ -121,16 +136,19 @@ function updateTapeType() {
 		document.getElementsByName("prefix")[0].disabled = false;
 		document.querySelector('input[name="colorizeChars"]').checked = true;
 		document.querySelector('select[name="colorscheme"]').value = 'HOT';
+		document.querySelector('select[name="tapeGen"]').value = '1';
 	} else if (type == "cln") {
 		document.getElementsByName("prefix")[0].value = "CLN";
 		document.getElementsByName("prefix")[0].disabled = true;
 		document.querySelector('input[name="colorizeChars"]').checked = false;
 		document.querySelector('select[name="colorscheme"]').value = 'BW';
+		document.querySelector('select[name="tapeGen"]').value = 'U';
 	} else if (type == "dg") {
 		document.getElementsByName("prefix")[0].value = "DG ";
 		document.getElementsByName("prefix")[0].disabled = true;
 		document.querySelector('input[name="colorizeChars"]').checked = false;
 		document.querySelector('select[name="colorscheme"]').value = 'INV';
+		document.querySelector('select[name="tapeGen"]').value = '1';
 	}
 	updateTextlabel();
 	updateColors();
@@ -145,9 +163,6 @@ function Init() {
 	l5 = document.getElementById("l5");
 	l6 = document.getElementById("l6");
 	mediatype = document.getElementById("mediatype");
-
-	suffix = document.getElementsByName("suffix")[0];
-	prefix = document.getElementsByName("prefix")[0];
 
 	updateTextlabel();
 	updateColors();
