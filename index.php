@@ -47,18 +47,19 @@
         </fieldset>
       </div>
       <div>
-        <label for="colorscheme">Farbschema</label>
+        <label for="colorscheme">Farbschema (<a href="colors.php">Farbtafel</a>)</label>
         <select name="colorscheme" onChange="updateColors()">
           <option value="HOT">HOT</option>
           <option value="WARM">WARM</option>
           <option value="COOL">COOL</option>
           <option value="BW">BW</option>
+          <option value="VIBRANT">VIBRANT</option>
           <option value="INV">INV</option>
         </select>
       </div>
       <div>
         <label><input type="checkbox" name="fontType" value="ocr"> OCR-A Font</label><br />
-        <label><input type="checkbox" name="colorizeChars" value="1" checked="checked"> Colorize Characters</label>
+        <label><input type="checkbox" name="colorizeChars" value="1" checked="checked" onChange="updateColors()"> Colorize Characters</label>
       </div>
     </div>
 
@@ -84,7 +85,7 @@
   </div>
 
   <footer>
-    A quick <a href="https://github.com/ixs/lto-barcodes/">ixs</a> hack.
+    <a href="https://github.com/ixs/lto-barcodes/">A quick hack, &copy; 2007-2025 Andreas Thienemann</a>.
   </footer>
 
 </body>
