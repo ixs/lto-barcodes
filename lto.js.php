@@ -104,6 +104,12 @@ function updateColors() {
 		}
 		mediatype.style.color = "white";
 		mediatype.style.backgroundColor = BLACK [" "];
+	} else if (getColor() == "COOL") {
+		for (var i = 1; i <= 6; i++) {
+			eval("l" + i + ".style.color = \"white\"");
+		}
+		mediatype.style.color = "black";
+		mediatype.style.backgroundColor = WHITE [" "];
 	} else {
 		for (var i = 1; i <= 6; i++) {
 			eval("l" + i + ".style.color = \"black\"");
