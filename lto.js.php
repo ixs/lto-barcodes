@@ -106,14 +106,17 @@ function updateTapeType() {
 	if (type == "normal") {
 		document.getElementsByName("prefix")[0].value = "ABC";
 		document.getElementsByName("prefix")[0].disabled = false;
+		document.querySelector('input[name="colorizeChars"]').checked = true;
 		document.querySelector('select[name="colorscheme"]').value = 'HOT';
 	} else if (type == "cln") {
 		document.getElementsByName("prefix")[0].value = "CLN";
 		document.getElementsByName("prefix")[0].disabled = true;
+		document.querySelector('input[name="colorizeChars"]').checked = false;
 		document.querySelector('select[name="colorscheme"]').value = 'BW';
 	} else if (type == "dg") {
 		document.getElementsByName("prefix")[0].value = "DG ";
 		document.getElementsByName("prefix")[0].disabled = true;
+		document.querySelector('input[name="colorizeChars"]').checked = false;
 		document.querySelector('select[name="colorscheme"]').value = 'INV';
 	}
 	updateTextlabel();

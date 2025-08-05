@@ -5,7 +5,7 @@
   <title>LTO Barcode Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="lto.css">
-  <script type="text/javascript" src="lto.js.php"></script>
+  <script type="text/javascript" src="lto.js.php" defer></script>
 </head>
 
 <body onload="Init()">
