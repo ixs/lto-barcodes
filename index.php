@@ -94,7 +94,7 @@
       <strong>farbige Zeichen</strong> aktiviert werden.
     </p>
     <p>
-      Nach dem Absenden wird ein <strong>PDF-Dokument mit 24 identischen Etiketten</strong> erzeugt, das sich zum Ausdrucken auf geeigneten Etikettenbögen eignet.
+      Nach dem Absenden wird ein <strong>PDF-Dokument mit 24 fortlaufenden Etiketten</strong> erzeugt, das sich zum Ausdrucken und ausschneiden eignen.
     </p>
   </section>
 
