@@ -44,6 +44,7 @@ if ($tapeType === "cln") {
 } elseif ($tapeType === "dg") {
     $pre = "DG ";
     $palette = "INV";
+    $colorizeChars = true;
 }
 
 // Black text, except if we're inverted.
