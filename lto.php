@@ -34,8 +34,10 @@ if ($fontType == 'normal') {
 }
 
 // Prefix
-//$pre = 'BWN';
 $pre = $_GET['prefix'] ?? '';
+
+// Suffix
+$suffix = $_GET['suffix'] ?? '';
 
 if ($tapeType === "cln") {
     $pre = "CLN";
@@ -52,7 +54,7 @@ $textColor = ($palette != "INV") ? [0, 0, 0] : [255, 255, 255];
 
 // Start number
 //$start = 24;
-$start = $_GET['suffix'] ?? 0;
+$start = $_GET['count'] ?? 0;
 
 // Number of labels
 $num = 24;
@@ -100,7 +102,8 @@ function lto_label($x, $y, $code, $id, $palette) {
 
         // Code39 Barcode
         $pdf->SetFillColor(0, 0, 0);
-	$pdf->Code39((float)$x+4.8, (float)$y+$text_h, $code . $id, 1.285, 11.10); //, true, false, true, false);
+	$pdf->Code39((float)$x+4.8, (float)$y+$text_h, $code . $id, 1.285, 11.10);
+#	$pdf->Code39((float)$x+4.8, (float)$y+$text_h, $code . $id, false, false, 0.432, 11.10, true, false, true, false);
 }
 
 $pdf=new PDF_Code39('P', 'mm', 'A4');
@@ -131,7 +134,7 @@ if ($pad != 0) {
 
 for ($i; $i < $num; $i++) {
 
-	$label = substr($pre . str_pad(($start+$i-$pad+(($i-$pad)*$step)), (6-$pre_len), 0, STR_PAD_LEFT), 0, 6);
+	$label = substr($pre . str_pad($start + $i, 6 - strlen($pre) - strlen($suffix), "0", STR_PAD_LEFT) . $suffix, 0, 6);
 
 	if (!($i%2)) {
 		lto_label(20, (($i*10)+30), $label, $id, $palette);
@@ -155,4 +158,4 @@ $pdf->SetY(-15);
 $pdf->Cell(190, 10, 'LTO Barcode Generator at ' . $url, 0, 0, 'R', false, $url);
 
 $pdf->Output();
-?>
+exit();
