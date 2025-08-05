@@ -24,7 +24,7 @@ foreach (array_keys($colors) as $color) {
 	echo "\n";
 }
 
-echo '
+?>
 
 function getColor() {
 	return document.getElementsByName("colorscheme")[0].value;
@@ -55,12 +55,14 @@ function updateTextlabel() {
 }
 
 function updateColors() {
-	l1.style.backgroundColor = eval(getColor() + " [l1.firstChild.nodeValue]");
-	l2.style.backgroundColor = eval(getColor() + " [l2.firstChild.nodeValue]");
-	l3.style.backgroundColor = eval(getColor() + " [l3.firstChild.nodeValue]");
-	l4.style.backgroundColor = eval(getColor() + " [l4.firstChild.nodeValue]");
-	l5.style.backgroundColor = eval(getColor() + " [l5.firstChild.nodeValue]");
-	l6.style.backgroundColor = eval(getColor() + " [l6.firstChild.nodeValue]");
+	for (var i = 1; i <= 6; i++) {
+		let char = eval("l" + i + ".firstChild.nodeValue");
+		if (/^[a-zA-Z]$/.test(char) && !document.querySelector('input[name="colorizeChars"]').checked) {
+			eval("l" + i + ".style.backgroundColor = " + getColor() + " [' ']");
+		} else {
+			eval("l" + i + ".style.backgroundColor = " + getColor() + " [l" + i + ".firstChild.nodeValue]");
+		}
+	}
 }
 
 function updateTapeGen() {
@@ -118,5 +120,3 @@ function Init() {
 	updateTapeGen();
 	updateTapeType();
 }
-
-';
