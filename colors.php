@@ -42,11 +42,14 @@ foreach ($colors as $paletteName => $palette) {
     $textColor = (strtoupper($paletteName) == 'COOL' || strtoupper($paletteName) == 'INV') ? '#fff' : '#000';
 
     foreach ($chr_ranges as list($start, $end)) {
+        $j = 0;
         for ($i = $start; $i <= $end; $i++) {
             $char = chr($i);
-            $rgb = $palette[$char];
+            // Grab RGB color, special case for Space
+            $rgb = ($char == " ") ? $palette[" "] : $palette[$j % 10];
             $bgColor = sprintf("rgb(%d,%d,%d)", $rgb[0], $rgb[1], $rgb[2]);
-            echo "<td style=\"background-color: $bgColor; color: $textColor;\">" . htmlspecialchars($char) . "</td>\n";
+            echo "  <td style=\"background-color: $bgColor; color: $textColor;\">" . htmlspecialchars($char) . "</td>\n";
+            $j++;
         }
     }
     echo "</tr></table>\n";
