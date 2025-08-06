@@ -3,6 +3,19 @@ define('FPDF_FONTPATH','font/');
 require('code39.php');
 
 $colors = json_decode(file_get_contents("colors.json"), true);
+$chr_ranges = [[65, 90]];
+foreach ($colors as $paletteName => $palette) {
+    foreach ($chr_ranges as list($start, $end)) {
+        $j = 0;
+        for ($i = $start; $i <= $end; $i++) {
+            $char = chr($i);
+            $rgb = ($char == " ") ? $palette[" "] : $palette[$j % 10];
+            $colors[$paletteName][$char] = $rgb;
+            $j++;
+        }
+    }
+}
+
 
 // Colorscheme
 $palette = $_GET['colorscheme'] ?? 'HOT';
