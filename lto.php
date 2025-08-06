@@ -62,8 +62,8 @@ if ($tapeType === "cln") {
     $colorizeChars = true;
 }
 
-// Black text, except if we're inverted.
-$textColor = ($palette != "BLACK") ? [0, 0, 0] : [255, 255, 255];
+// Black text, except if we're inverted or COOL.
+$textColor = ($palette != "BLACK" || $palette != "COOL") ? [0, 0, 0] : [255, 255, 255];
 
 // Start number
 //$start = 24;
