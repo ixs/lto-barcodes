@@ -54,16 +54,16 @@ $suffix = $_GET['suffix'] ?? '';
 
 if ($tapeType === "cln") {
     $pre = "CLN";
-    $palette = "BW";
+    $palette = "WHITE";
     $id = "CU";
 } elseif ($tapeType === "dg") {
     $pre = "DG ";
-    $palette = "INV";
+    $palette = "BLACK";
     $colorizeChars = true;
 }
 
 // Black text, except if we're inverted.
-$textColor = ($palette != "INV") ? [0, 0, 0] : [255, 255, 255];
+$textColor = ($palette != "BLACK") ? [0, 0, 0] : [255, 255, 255];
 
 // Start number
 //$start = 24;
