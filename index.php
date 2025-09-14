@@ -21,7 +21,7 @@
       </div>
       <div>
         <label for="count">Z&auml;hler</label>
-        <input name="count" type="text" maxlength="6" value="34" onkeyup="updateTextlabel()" />
+        <input name="count" type="text" pattern="[0-9]*" maxlength="6" value="34" onkeyup="updateTextlabel()" />
       </div>
       <div>
         <label for="suffix">Suffix (optional)</label>

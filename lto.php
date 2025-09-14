@@ -47,10 +47,10 @@ if ($fontType == 'normal') {
 }
 
 // Prefix
-$pre = $_GET['prefix'] ?? '';
+$pre = strtoupper($_GET['prefix'] ?? '');
 
 // Suffix
-$suffix = $_GET['suffix'] ?? '';
+$suffix = strtoupper($_GET['suffix'] ?? '');
 
 if ($tapeType === "cln") {
     $pre = "CLN";
@@ -67,7 +67,7 @@ $textColor = ($palette != "BLACK" && $palette != "COOL") ? [0, 0, 0] : [255, 255
 
 // Start number
 //$start = 24;
-$start = $_GET['count'] ?? 0;
+$start = (int)$_GET['count'] ?? 0;
 
 // Number of labels
 $num = 24;

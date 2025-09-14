@@ -41,9 +41,9 @@ function getColor() {
 function getLabelText() {
         let mediatype, count, suffix, prefix, typeType, tapegen;
 
-	prefix = document.getElementsByName("prefix")[0].value;
+	prefix = document.getElementsByName("prefix")[0].value.toUpperCase();
 	count = document.getElementsByName("count")[0].value;
-	suffix = document.getElementsByName("suffix")[0].value;
+	suffix = document.getElementsByName("suffix")[0].value.toUpperCase();
 	tapeType = document.querySelector('input[name="tapeType"]:checked').value;
 	tapegen = document.getElementsByName("tapeGen")[0].value;
 
